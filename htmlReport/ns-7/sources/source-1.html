@@ -1,0 +1,99 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EmployeeDao</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bajaj.employees.dao</a>
+</div>
+
+<h1>Coverage Summary for Class: EmployeeDao (com.bajaj.employees.dao)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">EmployeeDao$MockitoMock$Pg9iWvlp</td>
+  </tr>
+  <tr>
+    <td class="name">EmployeeDao$MockitoMock$Pg9iWvlp$auxiliary$J4uDXxRh</td>
+  </tr>
+  <tr>
+    <td class="name">EmployeeDao$MockitoMock$Pg9iWvlp$auxiliary$VUMEleoY</td>
+  </tr>
+  <tr>
+    <td class="name">EmployeeDao$MockitoMock$Pg9iWvlp$auxiliary$wrUXix43</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bajaj.employees.dao;
+&nbsp;
+&nbsp;import com.bajaj.employees.bean.EmployeeBean;
+&nbsp;import com.bajaj.employees.entity.EmployeeEntity;
+&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;@Repository
+&nbsp;public interface EmployeeDao extends JpaRepository&lt;EmployeeEntity,Integer&gt; {
+&nbsp;//    @Query(&quot;select q.employee_status from employee_entity q where q.employee_id=:id&quot;)
+&nbsp;//    public boolean checkEmployeeStatus(int id);
+&nbsp;    @Query(&quot;select q from EmployeeEntity q where q.employeeSalary=:salary&quot;)
+&nbsp;    List&lt;EmployeeEntity&gt; findEmployeeBySalary(int salary);
+&nbsp;
+&nbsp;//    @Query(&quot;SELECT e FROM EmployeeEntity e&quot;)
+&nbsp;//    List&lt;EmployeeEntity&gt; findAllWithDepartmentId();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-09 17:58</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DepartmentServiceImplementation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.bajaj.employees.service</a>
+</div>
+
+<h1>Coverage Summary for Class: DepartmentServiceImplementation (com.bajaj.employees.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DepartmentServiceImplementation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (16/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.bajaj.employees.service;
+&nbsp;
+&nbsp;import com.bajaj.employees.bean.DepartmentBean;
+&nbsp;import com.bajaj.employees.dao.DepartmentDao;
+&nbsp;import com.bajaj.employees.entity.DepartmentEntity;
+&nbsp;import com.bajaj.employees.exception.NoDepartmentNameFoundException;
+&nbsp;import org.springframework.beans.BeanUtils;
+&nbsp;import org.springframework.beans.BeansException;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class DepartmentServiceImplementation implements DepartmentService {</b>
+&nbsp;    @Autowired
+&nbsp;    private DepartmentDao departmentDao;
+&nbsp;    public String addDepartment(DepartmentBean departmentBean) throws NoDepartmentNameFoundException, NullPointerException {
+<b class="fc">&nbsp;        DepartmentEntity departmentEntity = new DepartmentEntity();</b>
+<b class="fc">&nbsp;            if(departmentBean.getDepartmentName()==null){</b>
+<b class="fc">&nbsp;                throw new NoDepartmentNameFoundException(&quot;No Department Name Found Exception&quot;);</b>
+&nbsp;            }
+&nbsp;            else {
+<b class="fc">&nbsp;                BeanUtils.copyProperties(departmentBean, departmentEntity);</b>
+<b class="fc">&nbsp;                departmentDao.save(departmentEntity);</b>
+<b class="fc">&nbsp;                System.out.println(&quot;Department Added&quot;);</b>
+<b class="fc">&nbsp;                return &quot;Department Added&quot;;</b>
+&nbsp;            }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;DepartmentBean&gt; findAllDepartmentDetailsEmployees() {
+&nbsp;
+<b class="fc">&nbsp;        List&lt;DepartmentBean&gt; departmentList =new ArrayList&lt;&gt;();</b>
+&nbsp;//        List&lt;DepartmentEntity&gt; it =departmentDao.findAll();
+<b class="fc">&nbsp;        List&lt;DepartmentEntity&gt; it = departmentDao.findAllActive();//Unless all employees are inactive the department did not become inactive</b>
+<b class="fc">&nbsp;        it.forEach(entity -&gt;{</b>
+<b class="fc">&nbsp;            DepartmentBean departmentBean =new DepartmentBean();</b>
+<b class="fc">&nbsp;            BeanUtils.copyProperties(entity,departmentBean);</b>
+<b class="fc">&nbsp;            departmentList.add(departmentBean);</b>
+&nbsp;        });
+<b class="fc">&nbsp;        System.out.println(departmentList);</b>
+<b class="fc">&nbsp;        return  departmentList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;DepartmentBean&gt; findById(int id) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;DepartmentBean&gt; findByEmployeeDepartmentById(int id) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-09 17:58</div>
+</div>
+</body>
+</html>
