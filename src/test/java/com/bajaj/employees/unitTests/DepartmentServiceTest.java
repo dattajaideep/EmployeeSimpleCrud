@@ -31,14 +31,14 @@ public class DepartmentServiceTest {
 
     @Test
     public void addDepartmentWithoutExceptionTest() throws NoDepartmentNameFoundException {
-        Set<EmployeeEntity> employeeEntitySet=null;
+
         DepartmentBean departmentBean=new DepartmentBean(101,"HaraTeja",null);
-        DepartmentEntity departmentEntity=new DepartmentEntity();
+
         String response=departmentServiceImplementation.addDepartment(departmentBean);
         assertEquals("Department Added",response);
     }
     @Test
-    public void addDepartmentWithExceptionTest() throws NoDepartmentNameFoundException {
+    public void addDepartmentWithExceptionTest() {
         DepartmentBean departmentBean=new DepartmentBean(101,null,null);
 //        String response=departmentServiceImplementation.addDepartment(departmentBean);
         assertThrows(NoDepartmentNameFoundException.class,() -> departmentServiceImplementation.addDepartment(departmentBean));
@@ -47,9 +47,9 @@ public class DepartmentServiceTest {
     @Test
     public void findAllDepartmentDetailsEmployeesTest(){
         Set<EmployeeEntity> employeeBeanSet=new HashSet<>();
-        employeeBeanSet.add(new EmployeeEntity(101,12000, 9100820659L,"Myself","None","active",null));
-        employeeBeanSet.add(new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","active",null));
-        employeeBeanSet.add(new EmployeeEntity(103,10000, 9121408873L,"GoSeeInMyContacts","CEO","inactive",null));
+        employeeBeanSet.add(new EmployeeEntity(101,12000, 9100820659L,"Myself","None","jaibajajdeep@gmail.com","Telangana","active",null));
+        employeeBeanSet.add(new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","jaibajajdeep@gmail.com","Telangana","active",null));
+        employeeBeanSet.add(new EmployeeEntity(103,10000, 9121408873L,"GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","inactive",null));
         DepartmentEntity departmentEntity=new DepartmentEntity(101,"Hara Teja",employeeBeanSet);
         List<DepartmentEntity> list=new ArrayList<>();
         List<DepartmentBean> list2=new ArrayList<>();

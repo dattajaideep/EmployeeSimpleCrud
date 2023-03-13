@@ -1,6 +1,5 @@
 package com.bajaj.employees.bean;
 
-import com.bajaj.employees.entity.DepartmentEntity;
 import lombok.*;
 
 import java.util.Date;
@@ -18,8 +17,8 @@ public class EmployeeBean {
     private Long employeeMobile;
     private String employeeName;
     private String employeeRole;
-//    private String employeeMail;
-//    private String employeeAddress;
+    private String employeeMail;
+    private String employeeAddress;
     private String employeeStatus;
     private Date employeeCreatedDate;
 }

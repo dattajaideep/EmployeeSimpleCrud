@@ -98,7 +98,7 @@ public class EmployeeControllerTest {
     @Test
     public void updateEmployeeByIdTest() throws Exception {
         int id=2000161;
-        EmployeeBean employeeBean=new EmployeeBean(2000161,40000, 9100820659L,"Jaideep",null,null,null);
+        EmployeeBean employeeBean=new EmployeeBean(2000161,40000, 9100820659L,"Jaideep",null,null,null,null,null);
         when(employeeServiceImplementation.updateEmployeeById(id,employeeBean)).thenReturn("Hello");
         mockMvc.perform(MockMvcRequestBuilders.put("/department/employee/update/{id}","2000161")
                         .contentType(MediaType.APPLICATION_JSON)

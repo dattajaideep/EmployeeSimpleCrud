@@ -36,12 +36,16 @@ public class DepartmentControllerTest {
     private ObjectMapper objectMapper;
     private Set<EmployeeEntity> employeeEntitySet;
     private DepartmentBean bean;
+
+    public DepartmentControllerTest() {
+    }
+
     @BeforeEach
     public void setUpBean(){
         employeeEntitySet=new HashSet<>();
-        employeeEntitySet.add(new EmployeeEntity(101,12000, 9100820659L,"Myself","None","active",null));
-        employeeEntitySet.add(new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","active",null));
-        employeeEntitySet.add(new EmployeeEntity(103,10000, 9121408873L,"GoSeeInMyContacts","CEO","inactive",null));
+        employeeEntitySet.add(new EmployeeEntity(101,12000, 9100820659L,"Myself","None","jaibajajdeep@gmail.com","Telangana","active",null));
+        employeeEntitySet.add(new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","jaibajajdeep@gmail.com","Pune","active",null));
+        employeeEntitySet.add(new EmployeeEntity(103,10000, 9121408873L,"GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Goa","inactive",null));
         bean=new DepartmentBean(101,"Hara Teja",employeeEntitySet);
     }
 

@@ -32,16 +32,16 @@ public class EmployeeServiceTest {
     private EmployeeEntity entity3;
     @BeforeEach
     public void setUp(){
-        entity1=new EmployeeEntity(101,12000, 9100820659L,"Myself","None","active",null);
-        entity2=new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","active",null);
-        entity3=new EmployeeEntity(103,11000, 9121408873L,"GoSeeInMyContacts","CEO","inactive",null);
+        entity1=new EmployeeEntity(101,12000, 9100820659L,"Myself","None","jaibajajdeep@gmail.com","Telangana","active",null);
+        entity2=new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","jaibajajdeep@gmail.com","Telangana","active",null);
+        entity3=new EmployeeEntity(103,11000, 9121408873L,"GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","inactive",null);
         entityList=new ArrayList<>();
         entityList.add(entity1);
         entityList.add(entity2);
         entityList.add(entity3);
-        EmployeeBean bean1=new EmployeeBean(101,12000, 9100820659L,"Myself","None","active",null);
-        EmployeeBean bean2=new EmployeeBean(102,11000, 9100353659L,"Mother","COO","active",null);
-        EmployeeBean bean3=new EmployeeBean(103,11000, 9121408873L,"GoSeeInMyContacts","CEO","inactive",null);
+        EmployeeBean bean1=new EmployeeBean(101,12000, 9100820659L,"Myself","None","jaibajajdeep@gmail.com","Telangana","active",null);
+        EmployeeBean bean2=new EmployeeBean(102,11000, 9100353659L,"Mother","COO","jaibajajdeep@gmail.com","Telangana","active",null);
+        EmployeeBean bean3=new EmployeeBean(103,11000, 9121408873L,"GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","inactive",null);
         beanList=new ArrayList<>();
         beanList.add(bean1);
         beanList.add(bean2);
@@ -93,7 +93,6 @@ public class EmployeeServiceTest {
      @Test
      public void deleteShouldEmployeeBeNotPresentTest1() throws NoEmployeeFoundException {
          int id= 104;
-         EmployeeEntity emptyEmployee=new EmployeeEntity();
          when(employeeDao.findById(id)).thenReturn(Optional.empty());
          String response= employeeServiceImplementation.deleteEmployeeById(id);
          assertEquals("No such employee found",response);
@@ -107,7 +106,7 @@ public class EmployeeServiceTest {
      }
     //Update Method Testcases
     @Test
-    public void updateShouldEmployeeBeActiveAndPresentTest() throws NoEmployeeFoundException {
+    public void updateShouldEmployeeBeActiveAndPresentTest() {
         int id= 102;
         EmployeeBean beanUpdate=new EmployeeBean();
         when(employeeDao.findById(id)).thenReturn(Optional.of(entity2));
@@ -116,28 +115,28 @@ public class EmployeeServiceTest {
     }
 
      @Test
-     public void updateShouldEmployeeBeInactiveAndPresentTest() throws NoEmployeeFoundException {
+     public void updateShouldEmployeeBeInactiveAndPresentTest() {
          int id= 103;
          EmployeeBean beanUpdate=new EmployeeBean(103,11000, 9121408873L,
-                 "GoSeeInMyContacts","CEO","active",null);
+                 "GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","active",null);
          when(employeeDao.findById(id)).thenReturn(Optional.of(entity3));
          String response= employeeServiceImplementation.updateEmployeeById(id,beanUpdate);
          assertEquals("No such employee found(Deleted)",response);
      }
      @Test
-     public void updateShouldEmployeeBeNotPresentTest1() throws NoEmployeeFoundException {
+     public void updateShouldEmployeeBeNotPresentTest1() {
          int id=104;
          EmployeeBean beanUpdate=new EmployeeBean(103,11000, 9121408873L,
-                 "GoSeeInMyContacts","CEO","active",null);
+                 "GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","active",null);
          when(employeeDao.findById(id)).thenReturn(Optional.empty());
          String response= employeeServiceImplementation.updateEmployeeById(id,beanUpdate);
          assertEquals("No such employee found",response);
      }
      @Test
-     public void updateShouldEmployeeBeNotPresentTest2() throws NoEmployeeFoundException {
+     public void updateShouldEmployeeBeNotPresentTest2() {
          int id= 104;
          EmployeeBean beanUpdate=new EmployeeBean(103,11000, 9121408873L,
-                 "GoSeeInMyContacts","CEO","active",null);
+                 "GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","active",null);
          when(employeeDao.findById(id)).thenReturn(null);
          String response= employeeServiceImplementation.updateEmployeeById(id,beanUpdate);
          assertEquals("No such employee found(Null Pointer)",response);

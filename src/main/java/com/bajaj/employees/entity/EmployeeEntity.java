@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
@@ -26,10 +24,10 @@ public class EmployeeEntity {
     private String employeeName;
     @Column(name = "employee_role")
     private String employeeRole;
-//    @Column(name = "employee_mail")
-//    private String employeeMail;
-//    @Column(name = "employee_address")
-//    private String employeeAddress;
+    @Column(name = "employee_mail")
+    private String employeeMail;
+    @Column(name = "employee_address")
+    private String employeeAddress;
     @Column(name = "employee_status")
     private String employeeStatus;
     @Column(name = "employeeCreatedDate")
