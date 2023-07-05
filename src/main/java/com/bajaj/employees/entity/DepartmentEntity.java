@@ -1,6 +1,9 @@
 package com.bajaj.employees.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -42,6 +45,12 @@ public class DepartmentEntity {
     public DepartmentEntity() {
     }
 
+    public DepartmentEntity(int departmentId, String departmentName, Set<EmployeeEntity> employeeEntityList) {
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.employeeEntityList = employeeEntityList;
+    }
+
     public int getDepartmentId() {
         return departmentId;
     }
@@ -77,12 +86,6 @@ public class DepartmentEntity {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public DepartmentEntity(int departmentId, String departmentName, Set<EmployeeEntity> employeeEntityList) {
-        this.departmentId = departmentId;
-        this.departmentName = departmentName;
-        this.employeeEntityList = employeeEntityList;
     }
 
     @Override

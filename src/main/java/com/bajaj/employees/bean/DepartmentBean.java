@@ -1,7 +1,9 @@
 package com.bajaj.employees.bean;
 
 import com.bajaj.employees.entity.EmployeeEntity;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -15,6 +17,16 @@ public class DepartmentBean {
     private int departmentId;
     private String departmentName;
     private Set<EmployeeEntity> employeeEntityList;
+
+    //Replaced Lombok
+    public DepartmentBean(int departmentId, String departmentName, Set<EmployeeEntity> employeeEntityList) {
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.employeeEntityList = employeeEntityList;
+    }
+
+    public DepartmentBean() {
+    }
 
     public int getDepartmentId() {
         return departmentId;
@@ -38,16 +50,6 @@ public class DepartmentBean {
 
     public void setEmployeeEntityList(Set<EmployeeEntity> employeeEntityList) {
         this.employeeEntityList = employeeEntityList;
-    }
-
-    //Replaced Lombok
-    public DepartmentBean(int departmentId, String departmentName, Set<EmployeeEntity> employeeEntityList) {
-        this.departmentId = departmentId;
-        this.departmentName = departmentName;
-        this.employeeEntityList = employeeEntityList;
-    }
-
-    public DepartmentBean() {
     }
 
     @Override

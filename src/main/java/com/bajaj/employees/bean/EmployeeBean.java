@@ -1,6 +1,8 @@
 package com.bajaj.employees.bean;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -21,6 +23,22 @@ public class EmployeeBean {
     private String employeeAddress;
     private String employeeStatus;
     private Date employeeCreatedDate;
+
+    //Replaced Lombok(Plugin Issues)
+    public EmployeeBean(int employeeId, int employeeSalary, Long employeeMobile, String employeeName, String employeeRole, String employeeMail, String employeeAddress, String employeeStatus, Date employeeCreatedDate) {
+        this.employeeId = employeeId;
+        this.employeeSalary = employeeSalary;
+        this.employeeMobile = employeeMobile;
+        this.employeeName = employeeName;
+        this.employeeRole = employeeRole;
+        this.employeeMail = employeeMail;
+        this.employeeAddress = employeeAddress;
+        this.employeeStatus = employeeStatus;
+        this.employeeCreatedDate = employeeCreatedDate;
+    }
+
+    public EmployeeBean() {
+    }
 
     public int getEmployeeId() {
         return employeeId;
@@ -92,22 +110,6 @@ public class EmployeeBean {
 
     public void setEmployeeCreatedDate(Date employeeCreatedDate) {
         this.employeeCreatedDate = employeeCreatedDate;
-    }
-
-    //Replaced Lombok(Plugin Issues)
-    public EmployeeBean(int employeeId, int employeeSalary, Long employeeMobile, String employeeName, String employeeRole, String employeeMail, String employeeAddress, String employeeStatus, Date employeeCreatedDate) {
-        this.employeeId = employeeId;
-        this.employeeSalary = employeeSalary;
-        this.employeeMobile = employeeMobile;
-        this.employeeName = employeeName;
-        this.employeeRole = employeeRole;
-        this.employeeMail = employeeMail;
-        this.employeeAddress = employeeAddress;
-        this.employeeStatus = employeeStatus;
-        this.employeeCreatedDate = employeeCreatedDate;
-    }
-
-    public EmployeeBean() {
     }
 
     @Override
