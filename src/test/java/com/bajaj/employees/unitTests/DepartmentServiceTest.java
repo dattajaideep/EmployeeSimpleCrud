@@ -23,44 +23,46 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DepartmentServiceTest {
+class DepartmentServiceTest {
     @InjectMocks
     DepartmentServiceImplementation departmentServiceImplementation;
     @Mock
     DepartmentDao departmentDao;
 
     @Test
-    public void addDepartmentWithoutExceptionTest() throws NoDepartmentNameFoundException {
+    void addDepartmentWithoutExceptionTest() throws NoDepartmentNameFoundException {
 
-        DepartmentBean departmentBean=new DepartmentBean(101,"HaraTeja",null);
+        DepartmentBean departmentBean = new DepartmentBean(101, "HaraTeja",null);
 
-        String response=departmentServiceImplementation.addDepartment(departmentBean);
-        assertEquals("Department Added",response);
+        String response = departmentServiceImplementation.addDepartment(departmentBean);
+        assertEquals("Department Added", response);
     }
+
     @Test
-    public void addDepartmentWithExceptionTest() {
-        DepartmentBean departmentBean=new DepartmentBean(101,null,null);
+    void addDepartmentWithExceptionTest() {
+        DepartmentBean departmentBean = new DepartmentBean(101, null, null);
 //        String response=departmentServiceImplementation.addDepartment(departmentBean);
-        assertThrows(NoDepartmentNameFoundException.class,() -> departmentServiceImplementation.addDepartment(departmentBean));
+        assertThrows(NoDepartmentNameFoundException.class, () -> departmentServiceImplementation.addDepartment(departmentBean));
 //        assertEquals("No Department Name Found Exception",response);
     }
+
     @Test
-    public void findAllDepartmentDetailsEmployeesTest(){
-        Set<EmployeeEntity> employeeBeanSet=new HashSet<>();
-        employeeBeanSet.add(new EmployeeEntity(101,12000, 9100820659L,"Myself","None","jaibajajdeep@gmail.com","Telangana","active",null));
-        employeeBeanSet.add(new EmployeeEntity(102,11000, 9100353659L,"Mother","COO","jaibajajdeep@gmail.com","Telangana","active",null));
-        employeeBeanSet.add(new EmployeeEntity(103,10000, 9121408873L,"GoSeeInMyContacts","CEO","jaibajajdeep@gmail.com","Telangana","inactive",null));
-        DepartmentEntity departmentEntity=new DepartmentEntity(101,"Hara Teja",employeeBeanSet);
-        List<DepartmentEntity> list=new ArrayList<>();
-        List<DepartmentBean> list2=new ArrayList<>();
+    void findAllDepartmentDetailsEmployeesTest() {
+        Set<EmployeeEntity> employeeBeanSet = new HashSet<>();
+        employeeBeanSet.add(new EmployeeEntity(101, 12000, 9100820659L, "Myself", "None", "jaibajajdeep@gmail.com", "Telangana", "active"));
+        employeeBeanSet.add(new EmployeeEntity(102, 11000, 9100353659L, "Mother", "COO", "jaibajajdeep@gmail.com", "Telangana", "active"));
+        employeeBeanSet.add(new EmployeeEntity(103, 10000, 9121408873L, "GoSeeInMyContacts", "CEO", "jaibajajdeep@gmail.com", "Telangana", "inactive"));
+        DepartmentEntity departmentEntity = new DepartmentEntity(101, "Hara Teja", employeeBeanSet);
+        List<DepartmentEntity> list = new ArrayList<>();
+        List<DepartmentBean> list2 = new ArrayList<>();
         list.add(departmentEntity);
         when(departmentDao.findAllActive()).thenReturn(list);
-        List<DepartmentBean> response=departmentServiceImplementation.findAllDepartmentDetailsEmployees();
-        list.forEach(entity ->{
-            DepartmentBean departmentBean =new DepartmentBean();
-            BeanUtils.copyProperties(entity,departmentBean);
+        List<DepartmentBean> response = departmentServiceImplementation.findAllDepartmentDetailsEmployees();
+        list.forEach(entity -> {
+            DepartmentBean departmentBean = new DepartmentBean();
+            BeanUtils.copyProperties(entity, departmentBean);
             list2.add(departmentBean);
         });
-        assertEquals(list2.toString(),response.toString());
+        assertEquals(list2.toString(), response.toString());
     }
 }

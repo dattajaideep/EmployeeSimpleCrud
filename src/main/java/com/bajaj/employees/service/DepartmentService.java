@@ -9,6 +9,8 @@ public interface DepartmentService {
     String addDepartment(DepartmentBean departmentBean) throws NoDepartmentNameFoundException;
 
     List<DepartmentBean> findAllDepartmentDetailsEmployees();
+
     List<DepartmentBean> findById(int id);
-    List<DepartmentBean> findByEmployeeDepartmentById(int id);
+
+    List<DepartmentBean> findEmployeeDepartmentById(int id);
 }
