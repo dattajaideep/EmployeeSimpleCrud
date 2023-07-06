@@ -24,17 +24,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EmployeeController.class)
-public class EmployeeControllerTest {
+class EmployeeControllerTest {
+    private final List<EmployeeBean> employeeBeanList = new ArrayList<>();
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private EmployeeServiceImplementation employeeServiceImplementation;
     @Autowired
     private ObjectMapper objectMapper;
-    private final List<EmployeeBean> employeeBeanList=new ArrayList<>();
+
     @BeforeEach
-    public void setUpBean(){
-        EmployeeBean employeeBean1=new EmployeeBean();
+    public void setUpBean() {
+        EmployeeBean employeeBean1 = new EmployeeBean();
         employeeBean1.setEmployeeId(2000163);
         employeeBean1.setEmployeeMobile(9000257219L);
         employeeBean1.setEmployeeSalary(35000);
@@ -42,7 +43,7 @@ public class EmployeeControllerTest {
         employeeBean1.setEmployeeName("Hara Teja");
         employeeBean1.setEmployeeRole("Intern");
         employeeBean1.setEmployeeCreatedDate(null);
-        EmployeeBean employeeBean2=new EmployeeBean();
+        EmployeeBean employeeBean2 = new EmployeeBean();
         employeeBean2.setEmployeeId(2000161);
         employeeBean2.setEmployeeMobile(9121408873L);
         employeeBean2.setEmployeeSalary(35000);
@@ -50,7 +51,7 @@ public class EmployeeControllerTest {
         employeeBean2.setEmployeeName("Datta Sai Jaideep");
         employeeBean2.setEmployeeRole("Intern");
         employeeBean2.setEmployeeCreatedDate(null);
-        EmployeeBean employeeBean3=new EmployeeBean();
+        EmployeeBean employeeBean3 = new EmployeeBean();
         employeeBean3.setEmployeeId(2000162);
         employeeBean3.setEmployeeMobile(9992228881L);
         employeeBean3.setEmployeeSalary(35000);
@@ -63,55 +64,59 @@ public class EmployeeControllerTest {
         employeeBeanList.add(employeeBean3);
 
     }
+
     @Test
-    public void allEmployeeTest() throws Exception {
+    void allEmployeeTest() throws Exception {
         when(employeeServiceImplementation.showAllEmployees()).thenReturn(employeeBeanList);
         mockMvc.perform(MockMvcRequestBuilders.get("/department/employee/find/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(objectMapper.writeValueAsString(employeeBeanList))));
     }
+
     @Test
-    public void allEmployeeByIdTest() throws Exception {
-        int id=2000161;
-        List<EmployeeBean> listForTestId= new ArrayList<>();
-                listForTestId.add(employeeBeanList.get(1));
+    void allEmployeeByIdTest() throws Exception {
+        int id = 2000161;
+        List<EmployeeBean> listForTestId = new ArrayList<>();
+        listForTestId.add(employeeBeanList.get(1));
         when(employeeServiceImplementation.showEmployeeById(id)).thenReturn(listForTestId);
-        MvcResult result=mockMvc.perform(MockMvcRequestBuilders.post("/department/employee/findbyid/all")
-                        .param("id","2000161"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/department/employee/findbyid/all")
+                        .param("id", "2000161"))
                 .andExpect(status().isOk())
                 .andReturn();
-        String resultBody=result.getResponse().getContentAsString();
-        assertEquals(objectMapper.writeValueAsString(listForTestId),resultBody);
-    }
-    @Test
-    public void allEmployeeBySalary() throws Exception{
-        int salary=35000;
-        when(employeeServiceImplementation.showEmployeeBySalary(salary)).thenReturn(employeeBeanList);
-        MvcResult result=mockMvc.perform(MockMvcRequestBuilders.post("/department/employee/findbysalary/all")
-                        .param("salary","35000"))
-                .andExpect(status().isOk())
-                .andReturn();
-        String resultBody=result.getResponse().getContentAsString();
-        assertEquals(objectMapper.writeValueAsString(employeeBeanList),resultBody);
+        String resultBody = result.getResponse().getContentAsString();
+        assertEquals(objectMapper.writeValueAsString(listForTestId), resultBody);
     }
 
     @Test
-    public void updateEmployeeByIdTest() throws Exception {
-        int id=2000161;
-        EmployeeBean employeeBean=new EmployeeBean(2000161,40000, 9100820659L,"Jaideep",null,null,null,null,null);
-        when(employeeServiceImplementation.updateEmployeeById(id,employeeBean)).thenReturn("Hello");
-        mockMvc.perform(MockMvcRequestBuilders.put("/department/employee/update/{id}","2000161")
+    void allEmployeeBySalary() throws Exception {
+        int salary = 35000;
+        when(employeeServiceImplementation.showEmployeeBySalary(salary)).thenReturn(employeeBeanList);
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/department/employee/findbysalary/all")
+                        .param("salary", "35000"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String resultBody = result.getResponse().getContentAsString();
+        assertEquals(objectMapper.writeValueAsString(employeeBeanList), resultBody);
+    }
+
+    @Test
+    void updateEmployeeByIdTest() throws Exception {
+        int id = 2000161;
+        EmployeeBean employeeBean = new EmployeeBean(2000161, 40000, 9100820659L, "Jaideep", null, null, null, null,null);
+        when(employeeServiceImplementation.updateEmployeeById(id, employeeBean)).thenReturn("Hello");
+        mockMvc.perform(MockMvcRequestBuilders.put("/department/employee/update/{id}", "2000161")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(employeeBean)))
                 .andExpect(status().isOk());
 //                .andExpect(content().string("Hello"));
 
     }
+
     @Test
-    public void deleteEmployeeByIdTest() throws Exception {
-        int id=2000162;
+    void deleteEmployeeByIdTest() throws Exception {
+        int id = 2000162;
         when(employeeServiceImplementation.deleteEmployeeById(id)).thenReturn("Deleted");
-        mockMvc.perform(MockMvcRequestBuilders.delete("/department/employee/delete/{id}",id))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/department/employee/delete/{id}", id))
                 .andExpect(content().string(containsString("Deleted")));
     }
 }
