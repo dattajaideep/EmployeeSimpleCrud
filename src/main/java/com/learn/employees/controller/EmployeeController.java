@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author jaideepvaranasi
+ */
 @RestController
 @RequestMapping("/department")
 public class EmployeeController {
@@ -21,36 +24,67 @@ public class EmployeeController {
 //            return new ResponseEntity<String>(msg, HttpStatus.OK);
 //        }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/employee/find/all")
     public ResponseEntity<List<EmployeeBean>> allEmployee() {
         List<EmployeeBean> msg = employeeService.showAllEmployees();
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @PostMapping("/employee/findbyid/all")//sorted order is problem
     public ResponseEntity<List<EmployeeBean>> allEmployeeById(@RequestParam int id) {
         List<EmployeeBean> msg = employeeService.showEmployeeById(id);
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param salary
+     * @return
+     */
     @PostMapping("/employee/findbysalary/all")
     public ResponseEntity<List<EmployeeBean>> allEmployeeBySalary(@RequestParam int salary) {
         List<EmployeeBean> msg = employeeService.showEmployeeBySalary(salary);
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id
+     * @param employeeBean
+     * @return
+     */
     @PutMapping("/employee/update/{id}")
     public ResponseEntity<String> updateEmployeeById(@PathVariable("id") int id, @RequestBody EmployeeBean employeeBean) {
         String msg = employeeService.updateEmployeeById(id, employeeBean);
         return new ResponseEntity<String>(msg, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws NoEmployeeFoundException
+     */
     @DeleteMapping("/employee/delete/{id}")
     public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") int id) throws NoEmployeeFoundException {
         String msg = employeeService.deleteEmployeeById(id);
         return new ResponseEntity<String>(msg, HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     @GetMapping("/employee/{name}/alllikename")
     public ResponseEntity<List<EmployeeBean>> allEmployeeLikeName(@PathVariable String name) {
         List<EmployeeBean> msg = employeeService.findEmployeeLikeName(name);

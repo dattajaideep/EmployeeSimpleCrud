@@ -1,10 +1,8 @@
 # EmployeeDepartmentCrudApplication
 ## Description
-***
 A getting started application, learn 
 Back-end CRUD(Employee-Department Model) application in Spring Boot with Junit 5-Test cases
 ## Installation
-***
 ### Pre-requisites
 * Java IDE
 * JDK - 17(Suggestion)
@@ -29,7 +27,8 @@ Example command : `sdk install java 19.0.2-amzn`
 * Exit the nano editor using CTRL+X
 * Load the new Setup using cmd `bash`
 * Check version `mvn -version`
-## What to Expect
+## Database ER diagram
+## Dependencies Implemented
 ***
 
 ***

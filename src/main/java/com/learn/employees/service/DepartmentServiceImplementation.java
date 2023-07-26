@@ -61,7 +61,7 @@ public class DepartmentServiceImplementation implements DepartmentService {
                 departmentDao.findEmployeeDepartmentById(id);
         empDeptSpec.add(new SearchCriteria());
         empDeptSpec.add(new SearchCriteria());
-//                departmentDao.findAll(empDeptSpec.add(new SearchCriteria("id",id, SearchOperation.EQUAL)));
+//      departmentDao.findAll(empDeptSpec.add(new SearchCriteria("id",id, SearchOperation.EQUAL)));
         departmentEntityList.forEach(entity -> {
             DepartmentBean departmentBean = new DepartmentBean();
             BeanUtils.copyProperties(entity, departmentBean);

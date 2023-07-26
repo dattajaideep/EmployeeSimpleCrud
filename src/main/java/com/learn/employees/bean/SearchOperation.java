@@ -1,5 +1,10 @@
 package com.learn.employees.bean;
 
+/**
+ * @author jaideepvaranasi
+ * Refer the below link
+ * @apiNote {@link <a href="https://reflectoring.io/spring-data-specifications/">Learn More about Jpa Specification</a>}
+ */
 public enum SearchOperation {
     GREATER_THAN,
     LESS_THAN,

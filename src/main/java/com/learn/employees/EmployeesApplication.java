@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableEurekaClient
+@EnableEurekaClient//Enable as Client for Eureka Server Registry
 @EnableEncryptableProperties
 public class EmployeesApplication {
     public static void main(String[] args) {
