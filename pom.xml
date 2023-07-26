@@ -8,7 +8,7 @@
         <version>2.7.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.bajaj</groupId>
+    <groupId>com.learn</groupId>
     <artifactId>employees</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>employees</name>
@@ -95,7 +95,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!--Mapstruct used for mapping DTO's-->
+        <!--Mapstruct used for mapping DTO'S-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>

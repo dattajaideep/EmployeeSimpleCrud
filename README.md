@@ -1,8 +1,8 @@
 # EmployeeDepartmentCrudApplication
 ## Description
 ***
-A getting started application to learn 
-Back-end CRUD application in Spring Boot with Junit-Test cases based of Employee-Department Model
+A getting started application, learn 
+Back-end CRUD(Employee-Department Model) application in Spring Boot with Junit 5-Test cases
 ## Installation
 ***
 ### Pre-requisites
@@ -31,5 +31,5 @@ Example command : `sdk install java 19.0.2-amzn`
 * Check version `mvn -version`
 ## What to Expect
 ***
-`git wait` 
+
 ***
