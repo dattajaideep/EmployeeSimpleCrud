@@ -27,6 +27,7 @@ Example command : `sdk install java 19.0.2-amzn`
 * Exit the nano editor using CTRL+X
 * Load the new Setup using cmd `bash`
 * Check version `mvn -version`
+## Tech Stack
 ## Database ER diagram
 ## Dependencies Implemented
 ***
