@@ -1,6 +1,6 @@
 # EmployeeDepartmentCrudApplication
 ## Description
-A getting started application, learn 
+A getting started with boiler-plate application, learn 
 Back-end CRUD(Employee-Department Model) application in Spring Boot with Junit 5-Test cases
 ## Installation
 ### Pre-requisites
