@@ -1,8 +1,12 @@
 package com.learn.employees.service;
 
 import com.learn.employees.bean.EmployeeBean;
+import com.learn.employees.bean.WeatherApiBean;
 import com.learn.employees.exception.NoEmployeeFoundException;
+import com.learn.employees.exception.ResourceNotFoundException;
+import org.springframework.http.HttpHeaders;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface EmployeeService {
@@ -18,4 +22,6 @@ public interface EmployeeService {
     String deleteEmployeeById(int id) throws NoEmployeeFoundException;
 
     List<EmployeeBean> findEmployeeLikeName(String name);
+
+    WeatherApiBean getWeatherDetailsByEmpIdAndIpaddress(int empId, HttpHeaders headers, HttpServletRequest httpServletRequest) throws ResourceNotFoundException;
 }

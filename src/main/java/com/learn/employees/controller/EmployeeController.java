@@ -1,13 +1,17 @@
 package com.learn.employees.controller;
 
 import com.learn.employees.bean.EmployeeBean;
+import com.learn.employees.bean.WeatherApiBean;
 import com.learn.employees.exception.NoEmployeeFoundException;
+import com.learn.employees.exception.ResourceNotFoundException;
 import com.learn.employees.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -89,5 +93,10 @@ public class EmployeeController {
     public ResponseEntity<List<EmployeeBean>> allEmployeeLikeName(@PathVariable String name) {
         List<EmployeeBean> msg = employeeService.findEmployeeLikeName(name);
         return new ResponseEntity<List<EmployeeBean>>(msg, HttpStatus.OK);
+    }
+    @GetMapping("/employee/weatherdetails/{empId}")
+    public ResponseEntity<WeatherApiBean> weatherDetailsByEmpId(@PathVariable int empId, @RequestHeader HttpHeaders headers, HttpServletRequest httpServletRequest) throws ResourceNotFoundException {
+        WeatherApiBean response = employeeService.getWeatherDetailsByEmpIdAndIpaddress(empId,headers,httpServletRequest);
+        return new ResponseEntity<WeatherApiBean>(response,HttpStatus.OK);
     }
 }

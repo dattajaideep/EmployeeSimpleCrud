@@ -27,9 +27,15 @@ Example command : `sdk install java 19.0.2-amzn`
 * Exit the nano editor using CTRL+X
 * Load the new Setup using cmd `bash`
 * Check version `mvn -version`
-## Tech Stack
-## Database ER diagram
-## Dependencies Implemented
-***
-
-***
+## Boilerplate Implementation
+### Spring-CRUD and MVC model
+### JUnit Mockito Test casing
+### Custom Exceptions
+### One-Many Mapping
+### Lombok
+### Spring Custom Banner
+### Mapstruct
+### Swagger Open API implementation
+### Spring Jpa Specification
+### Spring Cloud Eureka Client
+### Jasypt for Information Encryption

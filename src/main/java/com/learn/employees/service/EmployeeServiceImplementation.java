@@ -3,15 +3,26 @@ package com.learn.employees.service;
 import com.learn.employees.bean.EmployeeBean;
 import com.learn.employees.bean.SearchCriteria;
 import com.learn.employees.bean.SearchOperation;
+import com.learn.employees.bean.WeatherApiBean;
 import com.learn.employees.dao.DepartmentDao;
 import com.learn.employees.dao.EmployeeDao;
 import com.learn.employees.entity.EmployeeEntity;
 import com.learn.employees.exception.NoEmployeeFoundException;
+import com.learn.employees.exception.ResourceNotFoundException;
 import com.learn.employees.helper.EmpDeptSpec;
+import com.learn.employees.helper.WebUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +33,14 @@ public class EmployeeServiceImplementation implements EmployeeService {
     private EmployeeDao employeeDao;
     @Autowired
     private DepartmentDao departmentDao;
+
+    @Autowired
+    private WebUtils webUtils;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    private static final RestTemplate restTemplate = new RestTemplate();
 
 //    public String addEmployee(EmployeeBean employeeBean) {
 //        EmployeeEntity employeeEntity = new EmployeeEntity(12, 12l, "Jaideep", "Role");
@@ -113,9 +132,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
         String msg = null;
         EmpDeptSpec empDeptSpec = new EmpDeptSpec();
         try {
-            Optional<EmployeeEntity> employeeEntity = employeeDao.findById(id);
-//            empDeptSpec.add(new SearchCriteria("id", id, SearchOperation.EQUAL));
-//            Optional<EmployeeEntity> employeeEntity = employeeDao.findOne(empDeptSpec);
+//            Optional<EmployeeEntity> employeeEntity = employeeDao.findById(id);
+            empDeptSpec.add(new SearchCriteria("id", id, SearchOperation.EQUAL));
+            Optional<EmployeeEntity> employeeEntity = employeeDao.findOne(empDeptSpec);
             msg = "";
             if (employeeEntity.isPresent()) {
                 EmployeeEntity employee = employeeEntity.get();
@@ -145,5 +164,37 @@ public class EmployeeServiceImplementation implements EmployeeService {
             employeeBeans.add(employeeBean);
         });
         return employeeBeans;
+    }
+
+    @Override
+    public WeatherApiBean getWeatherDetailsByEmpIdAndIpaddress(int empId, HttpHeaders headers, HttpServletRequest httpServletRequest) throws ResourceNotFoundException {
+        webUtils.setRequest(httpServletRequest);
+        String Ipaddress = webUtils.getClientIp();
+        try {
+            String city = "Pune";
+            EmpDeptSpec empDeptSpec = new EmpDeptSpec();
+            empDeptSpec.add(new SearchCriteria("employeeId",empId,SearchOperation.EQUAL));
+            empDeptSpec.add(new SearchCriteria("employeeStatus","Active",SearchOperation.EQUAL));
+            Optional<EmployeeEntity> employeeEntityOptional = employeeDao.findOne(empDeptSpec);
+            if(employeeEntityOptional.isPresent()) {
+                if (!discoveryClient.getInstances("WEATHER-SERVICE").isEmpty()) {
+                    String hostUri = String.valueOf(discoveryClient.getInstances("WEATHER-SERVICE").get(0).getUri());
+                    URI uri = UriComponentsBuilder
+                            .fromUriString(hostUri + "/employee").pathSegment(city)
+                            .queryParam("empId", empId).build().toUri();
+                    ResponseEntity<WeatherApiBean> response = restTemplate.exchange(uri, HttpMethod.GET, null, WeatherApiBean.class);
+                    if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                        return response.getBody();
+                    }
+                } else {
+                    throw new ResourceNotFoundException("Service unavailable");
+                }
+            } else {
+                throw new NoEmployeeFoundException("No such employee available");
+            }
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Service unavailable");
+        }
+        return new WeatherApiBean();
     }
 }
