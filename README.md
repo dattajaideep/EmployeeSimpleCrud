@@ -38,4 +38,8 @@ Example command : `sdk install java 19.0.2-amzn`
 ### Swagger Open API implementation
 ### Spring Jpa Specification
 ### Spring Cloud Eureka Client
-### Jasypt for Information Encryption
+### Jasypt-Set-Up Guide
+* Extract the installed zip from [Jasypt GitHub page](https://github.com/jasypt/jasypt?tab=readme-ov-file)
+* From wsl terminal or mac terminal change directory to /jasypt-1.9.3/bin/ and run the following as needed for encryption
+* `./encrypt.sh ivGeneratorClassName=org.jasypt.iv.RandomIvGenerator input="postges" password=sj2102 algorithm=PBEWITHHMACSHA512ANDAES_256`
+* For decryption refer [Official Jasypt Webpage](http://www.jasypt.org/cli.html)
